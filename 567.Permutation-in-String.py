@@ -53,3 +53,29 @@ class Solution(object):
                 return True
 
         return False
+
+
+class Solution(object):
+    def checkInclusion(self, s1, s2):
+        """
+        :type s1: str
+        :type s2: str
+        :rtype: bool
+        """
+        if len(s1) > len(s2):
+            return False
+        target = [0 for i in range(26)]
+        window = [0 for i in range(26)]
+        
+        for c in s1:
+            target[ord(c) - 97] += 1
+        for i in range(len(s1)):
+            window[ord(s2[i])-97] += 1
+        if target == window:
+            return True
+        for i in range(len(s1), len(s2)):
+            window[ord(s2[i])-97] += 1
+            window[ord(s2[i-len(s1)])-97] -= 1
+            if target == window:
+                return True
+        return False
