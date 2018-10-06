@@ -6,6 +6,8 @@
 // Total Submissions: 164.1k
 // beats 54.84% of golang submissions
 
+package leetcode
+
 func findPairs(nums []int, k int) int {
 	if k < 0 {
 		return 0
