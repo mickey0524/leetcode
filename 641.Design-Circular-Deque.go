@@ -1,7 +1,7 @@
 // https://leetcode.com/problems/search-in-a-binary-search-tree/description/
 //
 // algorithms
-// Easy (48.8%)
+// Medium (48.8%)
 // Total Accepted:    2.2k
 // Total Submissions: 4.5k
 // beats 100.0% of golang submissions
