@@ -4,7 +4,7 @@
 # Easy (61.31%)
 # Total Accepted:    8.4k
 # Total Submissions: 13.7k
-# beats 14.19% of python submissions
+# beats 99.77% of python submissions
 
 
 """
@@ -28,8 +28,9 @@ class Solution(object):
             if not node:
                 return
 
-            for child in node.children:
-                resursive(child)
+            if node.children:
+                for child in node.children:
+                    resursive(child)
 
             res[0] += node.val,
 
