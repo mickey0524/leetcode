@@ -1,7 +1,7 @@
 # https://leetcode.com/problems/length-of-last-word/
 #
 # algorithms
-# Medium (32.09%)
+# Easy (32.09%)
 # Total Accepted:    232,624
 # Total Submissions: 724,955
 
@@ -20,4 +20,3 @@ class Solution(object):
             return len(s)
         
         return len(s[space_idx+1:])
-        
