@@ -13,6 +13,9 @@
  *     Right *TreeNode
  * }
  */
+
+package leetcode
+
 var res int
 
 func maxDepth(root *TreeNode) int {
