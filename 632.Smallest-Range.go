@@ -6,7 +6,7 @@
 // Total Submissions: 38,772
 // beats 100.0% of golang submissions
 
-package main
+package leetcode
 
 import "container/heap"
 
