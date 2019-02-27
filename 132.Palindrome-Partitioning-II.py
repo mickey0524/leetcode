@@ -62,3 +62,32 @@ class Solution(object):
                 cut[i+r2+2] = min(cut[i+r2+2], cut[i-r2]+1)
                 r2 += 1
         return cut[-1]
+
+# 复习的时候，自己的 dp 做法
+
+
+class Solution(object):
+    def minCut(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        if s == s[::-1]:
+            return 0
+        for i in range(1, len(s)):
+            if s[:i] == s[:i][::-1] and s[i:] == s[i:][::-1]:
+                return 1
+
+        length = len(s)
+        dp = [-1] * (length + 1)
+        dp[0] = 0
+
+        for i in xrange(1, length+1):
+            tmp = float('inf')
+            for j in xrange(0, i):
+                if dp[j] != -1 and s[j:i] == s[j:i][::-1]:
+                    tmp = min(tmp, dp[j] + 1)
+            if tmp < float('inf'):
+                dp[i] = tmp
+
+        return dp[-1] - 1
