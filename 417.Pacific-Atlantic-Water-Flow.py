@@ -101,3 +101,40 @@ class Solution1(object):
 
         sol = scan('pacific').intersection(scan('atlantic'))
         return [list(x) for x in sol]
+
+
+class Solution2(object):
+    def pacificAtlantic(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        if not matrix:
+            return []
+        self.m, self.n = len(matrix), len(matrix[0])
+        #对每一个海水逆向DFS
+        p = set()
+        a = set()
+
+        def dfs(x, y, set1):
+            u = matrix[x][y]
+            set1.add((x, y))
+            if x > 0 and matrix[x-1][y] >= u:
+                if (x-1, y) not in set1:
+                    dfs(x-1, y, set1)
+            if x+1 < self.m and matrix[x+1][y] >= u:
+                if (x+1, y) not in set1:
+                    dfs(x+1, y, set1)
+            if y > 0 and matrix[x][y-1] >= u:
+                if (x, y-1) not in set1:
+                    dfs(x, y-1, set1)
+            if y+1 < self.n and matrix[x][y+1] >= u:
+                if (x, y+1) not in set1:
+                    dfs(x, y+1, set1)
+        for i in range(self.m):
+            dfs(i, 0, p)
+            dfs(i, self.n-1, a)
+        for j in range(self.n):
+            dfs(0, j, p)
+            dfs(self.m-1, j, a)
+        return list(p & a)
