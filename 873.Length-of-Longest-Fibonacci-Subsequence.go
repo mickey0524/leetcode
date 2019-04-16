@@ -5,6 +5,8 @@
 // Total Accepted:    9,779
 // Total Submissions: 22,516
 
+package leetcode
+
 func lenLongestFibSubseq(A []int) int {
 	length := len(A)
 

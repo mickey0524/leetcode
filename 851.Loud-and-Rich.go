@@ -6,6 +6,8 @@
 // Total Submissions: 13,461
 // beats 100.0% of golang submissions
 
+package leetcode
+
 type leastStruct struct {
 	value int
 	index int

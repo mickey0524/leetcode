@@ -1,3 +1,5 @@
+package leetcode
+
 import "strconv"
 
 // https://leetcode.com/problems/walking-robot-simulation/

@@ -6,6 +6,8 @@
 // Total Submissions: 17,616
 // beats 100.0% of golang submissions
 
+package leetcode
+
 type continuousNum struct {
 	length int
 	idx    int
