@@ -43,3 +43,40 @@ class Solution(object):
         resursive('', [], 0, length)
 
         return res[0]
+
+
+class Solution1(object):
+    def partition(self, s):
+        """
+        :type s: str
+        :rtype: List[List[str]]
+        """
+        length = len(s)
+        if length == 0:
+            return []
+        if length == 1:
+            return [s]
+
+        dp = [[] for _ in xrange(length + 1)]
+        dp[1] = [0]
+
+        for i in xrange(2, length + 1):
+            if s[:i] == s[:i][::-1]:
+                dp[i].append(0)
+            for j in xrange(1, i):
+                if dp[j] and s[j:i] == s[j:i][::-1]:
+                    dp[i].append(j)
+
+        res = [[]]
+
+        def recursive(idx, path):
+            if idx == 0:
+                res[0].append(path)
+                return
+
+            for i in dp[idx]:
+                recursive(i, [s[i:idx]] + path)
+
+        recursive(length, [])
+
+        return res[0]
