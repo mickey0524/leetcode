@@ -47,3 +47,40 @@ class Solution(object):
             l, r = l.next, r.next
 
         return True
+
+
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution1(object):
+    def isPalindrome(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        if not head or not head.next:
+            return True
+
+        first, second, pre = head, head, None
+
+        while second and second.next:
+            second = second.next.next
+            tmp = first.next
+            first.next = pre
+            pre = first
+            first = tmp
+
+        second = first.next if second else first
+        # pre.next = None
+        first = pre
+
+        while first and second:
+            if first.val != second.val:
+                return False
+            first = first.next
+            second = second.next
+
+        return True
