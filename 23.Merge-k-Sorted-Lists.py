@@ -49,3 +49,31 @@ class Solution(object):
             pre.next = b
 
         return res.next
+
+
+from heapq import heappush, heappop
+
+
+class Solution1(object):
+    def mergeKLists(self, lists):
+        """
+        :type lists: List[ListNode]
+        :rtype: ListNode
+        """
+        heap = []
+        res = ListNode(-1)
+        tmp = res
+
+        for l in lists:
+            if l:
+                heappush(heap, (l.val, l))
+
+        while heap:
+            _, l = heappop(heap)
+            if l.next:
+                heappush(heap, (l.next.val, l.next))
+            tmp.next = l
+            tmp = l
+            l.next = None
+
+        return res.next
