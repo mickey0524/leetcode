@@ -63,3 +63,33 @@ func compareVersion(version1 string, version2 string) int {
 
 	return -1
 }
+
+func compareVersion(version1 string, version2 string) int {
+	arr1, arr2 := strings.Split(version1, "."), strings.Split(version2, ".")
+	len1, len2 := len(arr1), len(arr2)
+
+	for i := 0; i < max(len1, len2); i++ {
+		var num1, num2 int
+		if i < len1 {
+			num1, _ = strconv.Atoi(arr1[i])
+		}
+		if i < len2 {
+			num2, _ = strconv.Atoi(arr2[i])
+		}
+		if num1 < num2 {
+			return -1
+		}
+		if num1 > num2 {
+			return 1
+		}
+	}
+
+	return 0
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
