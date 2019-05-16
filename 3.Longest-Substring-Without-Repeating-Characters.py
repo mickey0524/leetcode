@@ -29,3 +29,35 @@ class Solution(object):
             tail += 1
 
         return res
+
+
+# 二刷的时候速度更快的做法
+
+class Solution1(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        length = len(s)
+        res = float('-inf')
+        hash_map = {}
+        pre_idx = 0
+
+        for idx in xrange(length):
+            ch = s[idx]
+            if ch in hash_map:
+                res = max(res, idx - pre_idx)
+                ch_pre_idx = hash_map[ch]
+
+                for i in xrange(pre_idx, ch_pre_idx + 1):
+                    if hash_map[s[i]] < ch_pre_idx:
+                        del hash_map[s[i]]
+
+                pre_idx = ch_pre_idx + 1
+
+            hash_map[ch] = idx
+
+        res = max(res, length - pre_idx)
+
+        return res
