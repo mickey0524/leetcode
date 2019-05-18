@@ -49,3 +49,36 @@ func factorial(n int) int {
 
 	return res
 }
+
+var res string
+
+func getPermutation1(n int, k int) string {
+	if n == 1 {
+		return "1"
+	}
+
+	res = ""
+	curSum := 1
+	var arr []int
+	for i := 1; i <= n; i++ {
+		curSum *= i
+		arr = append(arr, i)
+	}
+	curSum /= n
+
+	recursive(arr, k, n-1, curSum)
+
+	return res
+}
+
+func recursive(arr []int, k, n, curSum int) {
+	if n == 0 {
+		res += strconv.Itoa(arr[0])
+		return
+	}
+	idx := (k - 1) / curSum
+	res += strconv.Itoa(arr[idx])
+	tmp := append(arr[:idx:idx], arr[idx+1:]...)
+
+	recursive(tmp, k-curSum*idx, n-1, curSum/n)
+}
