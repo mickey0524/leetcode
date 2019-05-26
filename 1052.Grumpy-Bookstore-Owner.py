@@ -1,5 +1,5 @@
 # https://leetcode.com/problems/grumpy-bookstore-owner/
-# Easy (46.84%)
+# Medium (46.84%)
 # Total Accepted:    2,136
 # Total Submissions: 4,560
 # beats 100.0% of python submissions
