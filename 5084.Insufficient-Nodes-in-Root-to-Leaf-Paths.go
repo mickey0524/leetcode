@@ -17,6 +17,15 @@ package leetcode
  * }
  */
 
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+
 type treeNodeEntry struct {
 	left bool
 	node *TreeNode
@@ -48,11 +57,7 @@ func sufficientSubset(root *TreeNode, limit int) *TreeNode {
 func recursive(node *TreeNode, sum, limit int) {
 	if node.Left == nil && node.Right == nil {
 		if sum+node.Val < limit {
-			if stack[len(stack)-1].left {
-				stack[len(stack)-1].node.Left = nil
-			} else {
-				stack[len(stack)-1].node.Right = nil
-			}
+			deleteNode()
 		}
 		return
 	}
@@ -76,14 +81,18 @@ func recursive(node *TreeNode, sum, limit int) {
 	}
 
 	if node.Left == nil && node.Right == nil {
-		length := len(stack)
-		if length == 0 {
-			return
-		}
-		if stack[length-1].left {
-			stack[length-1].node.Left = nil
-		} else {
-			stack[length-1].node.Right = nil
-		}
+		deleteNode()
+	}
+}
+
+func deleteNode() {
+	length := len(stack)
+	if length == 0 {
+		return
+	}
+	if stack[length-1].left {
+		stack[length-1].node.Left = nil
+	} else {
+		stack[length-1].node.Right = nil
 	}
 }
