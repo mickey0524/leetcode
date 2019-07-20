@@ -38,3 +38,43 @@ class Solution(object):
                         res = min(res, (x - lastx[y1, y2]) * (y2 - y1))
                     lastx[y1, y2] = x
         return res if res < float('inf') else 0 
+
+
+from collections import defaultdict
+from bisect import insort
+
+class Solution1(object):
+    def minAreaRect(self, points):
+        """
+        :type points: List[List[int]]
+        :rtype: int
+        """
+        col_m = defaultdict(list)
+        row_m = {}
+        
+        for x, y in points:
+            insort(col_m[x], y)
+            if y not in row_m:
+                row_m[y] = {}
+            row_m[y][x] = True
+        # print col_m, row_m
+        res = float('inf')
+        keys = col_m.keys()
+        keys.sort()
+        length = len(keys)
+        # print keys
+        for i in xrange(length - 1):
+            for j in xrange(i + 1, length):
+                pre = -1
+                for y in col_m[keys[i]]:
+                    if keys[j] not in row_m[y]:
+                        continue
+                    
+                    if pre != -1:
+                        # print i, j, pre, y
+                        res = min((keys[j] - keys[i]) * (y - pre), res)
+                        
+                    pre = y
+        
+        return 0 if res == float('inf') else res
+                
