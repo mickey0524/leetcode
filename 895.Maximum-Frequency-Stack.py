@@ -48,3 +48,37 @@ class FreqStack(object):
 # obj = FreqStack()
 # obj.push(x)
 # param_2 = obj.pop()
+
+
+from collections import defaultdict
+
+
+class FreqStack1(object):
+
+    def __init__(self):
+        self.max_freq = float('-inf')
+        self.freq = defaultdict(int)
+        self.freq_group = defaultdict(list)
+
+    def push(self, x):
+        """
+        :type x: int
+        :rtype: None
+        """
+        self.freq[x] += 1
+        self.freq_group[self.freq[x]] += x,
+
+        if self.max_freq < self.freq[x]:
+            self.max_freq = self.freq[x]
+
+    def pop(self):
+        """
+        :rtype: int
+        """
+        res = self.freq_group[self.max_freq].pop()
+        self.freq[res] -= 1
+
+        if not self.freq_group[self.max_freq]:
+            self.max_freq -= 1
+
+        return res
