@@ -20,18 +20,21 @@ class Solution(object):
         :type n: int
         :rtype: ListNode
         """
-        first = head
+        if not head:
+            return None
+
+        res = ListNode(-1)
+        res.next = head
+
+        slow, fast = res, res
+
         for _ in xrange(n):
-            first = first.next
-        parent = ListNode(0)
-        pre = parent
-        parent.next = head
+            fast = fast.next
 
-        while first:
-            first = first.next
-            pre = head
-            head = head.next
+        while fast.next:
+            fast = fast.next
+            slow = slow.next
 
-        pre.next = head.next
+        slow.next = slow.next.next
 
-        return parent.next
+        return res.next
