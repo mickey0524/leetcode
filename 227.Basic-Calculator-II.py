@@ -15,38 +15,47 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        s = s.replace(' ', '')
         stack = deque()
-        i = 0
+
+        s = s.strip()
         length = len(s)
 
-        while i < length:
-            if ord(s[i]) >= 48 and ord(s[i]) <= 57:
-                begin_idx = i
-                i += 1
-                while i < length and ord(s[i]) >= 48 and ord(s[i]) <= 57:
-                    i += 1
-                num = int(s[begin_idx:i])
-                if len(stack) == 0 or stack[0] == '+' or stack[0] == '-':
-                    stack.appendleft(num)
-                else:
-                    if stack[0] == '*':
-                        op = stack.popleft()
-                        another_num = stack.popleft()
-                        stack.appendleft(num * another_num)
-                    if stack[0] == '/':
-                        op = stack.popleft()
-                        another_num = stack.popleft()
-                        stack.appendleft(another_num / num)
+        idx = 0
+
+        while idx < length:
+            if s[idx] == ' ':
+                idx += 1
+                continue
+
+            if s[idx].isdigit():
+                j = idx + 1
+                while j < length and s[j].isdigit():
+                    j += 1
+
+                n = int(s[idx:j])
+                if stack and (stack[-1] == '*' or stack[-1] == '/'):
+                    op = stack.pop()
+                    pre_num = stack.pop()
+                    if op == '*':
+                        n = n * pre_num
+                    else:
+                        n = pre_num / n
+
+                stack.append(n)
+                idx = j
+
             else:
-                stack.appendleft(s[i])
-                i += 1
+                stack.append(s[idx])
+                idx += 1
 
-        while len(stack) != 1:
-            num1 = stack.pop()
-            op = stack.pop()
-            num2 = stack.pop()
-            res = num1 + num2 if op == '+' else num1 - num2
-            stack.append(res)
+        pre_num = stack.popleft()
 
-        return stack[0]
+        while stack:
+            op = stack.popleft()
+            next_num = stack.popleft()
+            if op == '+':
+                pre_num += next_num
+            else:
+                pre_num -= next_num
+
+        return pre_num
