@@ -34,3 +34,29 @@ class Solution(object):
         resursive(root)
 
         return res[0]
+
+
+from collections import deque
+
+
+class Solution1(object):
+    def preorder(self, root):
+        """
+        :type root: Node
+        :rtype: List[int]
+        """
+        if not root:
+            return []
+
+        q = deque([root])
+        res = []
+
+        while q:
+            node = q.pop()
+            res.append(node.val)
+
+            if node.children:
+                for n in reversed(node.children):
+                    q.append(n)
+
+        return res
