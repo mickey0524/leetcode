@@ -35,3 +35,24 @@ class Solution(object):
             tmp.next = None
 
         return res
+
+
+class Solution1(object):
+    def deleteDuplicates(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if not head or not head.next:
+            return head
+
+        tmp = head
+        while tmp:
+            next_node = tmp.next
+            while next_node and tmp.val == next_node.val:
+                next_node = next_node.next
+
+            tmp.next = next_node
+            tmp = next_node
+
+        return head
