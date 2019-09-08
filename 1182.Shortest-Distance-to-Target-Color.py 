@@ -1,0 +1,44 @@
+# https://leetcode.com/problems/diet-plan-performance/
+# Medium (45.6%)
+# Total Accepted:    2,956
+# Total Submissions: 6,489
+
+
+from bisect import bisect
+
+
+class Solution(object):
+    def shortestDistanceColor(self, colors, queries):
+        """
+        :type colors: List[int]
+        :type queries: List[List[int]]
+        :rtype: List[int]
+        """
+        nums = [[] for _ in xrange(4)]
+
+        for idx, c in enumerate(colors):
+            nums[c].append(idx)
+
+        res = [-1] * len(queries)
+        for idx, (i, c) in enumerate(queries):
+            if colors[i] == c:
+                res[idx] = 0
+
+            dis = float('inf')
+            c_len = len(nums[c])
+            insert_idx = bisect(nums[c], i)
+
+            if insert_idx < c_len:
+                dis = min(dis, abs(nums[c][insert_idx] - i))
+
+            if insert_idx - 1 >= 0:
+                dis = min(dis, abs(nums[c][insert_idx - 1] - i))
+
+            if insert_idx + 1 < c_len:
+                dis = min(dis, abs(nums[c][insert_idx + 1] - i))
+
+            if dis != float('inf'):
+                res[idx] = dis
+
+        return res
+        
