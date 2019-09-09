@@ -48,3 +48,53 @@ class Solution(object):
             self.resursive(x, y - 1, board, row, col)
         if y < col - 1 and board[x][y + 1] == 'O' and not self.is_visited[x][y + 1]:
             self.resursive(x, y + 1, board, row, col)
+
+
+class Solution1(object):
+    def solve(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: None Do not return anything, modify board in-place instead.
+        """
+        row = len(board)
+        if row == 0:
+            return
+        col = len(board[0])
+
+        def recursive(i, j):
+            board[i][j] = 'A'
+            if i > 0 and board[i - 1][j] == 'O':
+                recursive(i - 1, j)
+
+            if i < row - 1 and board[i + 1][j] == 'O':
+                recursive(i + 1, j)
+
+            if j > 0 and board[i][j - 1] == 'O':
+                recursive(i, j - 1)
+
+            if j < col - 1 and board[i][j + 1] == 'O':
+                recursive(i, j + 1)
+
+        for i in xrange(row):
+            if board[i][0] == 'O':
+                recursive(i, 0)
+
+            if board[i][col - 1] == 'O':
+                recursive(i, col - 1)
+
+        for i in xrange(col):
+            if board[0][i] == 'O':
+                recursive(0, i)
+
+            if board[row - 1][i] == 'O':
+                recursive(row - 1, i)
+
+        for i in xrange(row):
+            for j in xrange(col):
+                if board[i][j] == 'O':
+                    board[i][j] = 'X'
+
+        for i in xrange(row):
+            for j in xrange(col):
+                if board[i][j] == 'A':
+                    board[i][j] = 'O'
