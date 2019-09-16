@@ -42,3 +42,31 @@ class Solution:
             if nums[i] != i+1:
                 return i+1
         return len(nums)+1
+
+class Solution1(object):
+    def firstMissingPositive(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        length = len(nums)
+        if length == 0:
+            return 1
+        if length == 1:
+            return 1 if nums[0] != 1 else 2
+
+        for i in xrange(length):
+
+            while nums[i] >= 0 and nums[i] < length and nums[i] != i:
+                if nums[nums[i]] == nums[i]:
+                    break
+
+                tmp = nums[nums[i]]
+                nums[nums[i]] = nums[i]
+                nums[i] = tmp
+
+        for i in xrange(1, length):
+            if nums[i] != i:
+                return i
+
+        return length if nums[0] != length else length + 1
