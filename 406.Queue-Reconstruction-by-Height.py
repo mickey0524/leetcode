@@ -16,17 +16,17 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         hash_map = defaultdict(list)
-        for idx, p in enumerate(people):
-            hash_map[p[0]] += (p[1], idx),
+        for h, k in people:
+            hash_map[h].append(k)
 
-        heights = hash_map.keys()
+        keys = hash_map.keys()
         res = []
 
-        for h in reversed(sorted(heights)):
+        for h in reversed(sorted(keys)):
             arr = hash_map[h]
             arr.sort()
 
-            for item in arr:
-                res.insert(item[0], people[item[1]])
+            for n in arr:
+                res.insert(n, [h, n])
 
         return res

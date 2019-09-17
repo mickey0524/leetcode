@@ -10,10 +10,10 @@ class Solution {
         int row = matrix.length, col = matrix[0].length;
         int l = matrix[0][0], r = matrix[row - 1][col - 1], m = -1;
         
-        while (l < r) {
+        while (l <= r) {
             m = l + (r - l) / 2;
             if (helper(matrix, m) >= k) {
-                r = m;
+                r = m - 1;
             } else {
                 l = m + 1;
             }
