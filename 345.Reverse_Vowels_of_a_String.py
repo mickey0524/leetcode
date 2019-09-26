@@ -33,3 +33,27 @@ class Solution(object):
             tail -= 1
 
         return ''.join(arr)
+
+
+class Solution1(object):
+    def reverseVowels(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        vowel = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'}
+        idxs = []
+
+        for idx, ch in enumerate(s):
+            if ch in vowel:
+                idxs.append(idx)
+
+        i, j = 0, len(idxs) - 1
+        res = list(s)
+
+        while i < j:
+            res[idxs[i]], res[idxs[j]] = res[idxs[j]], res[idxs[i]]
+            i += 1
+            j -= 1
+
+        return ''.join(res)
