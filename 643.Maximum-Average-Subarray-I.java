@@ -25,3 +25,23 @@ class Solution {
         return (double) res / k;
     }
 }
+
+
+class Solution {
+    public double findMaxAverage(int[] nums, int k) {
+        int len = nums.length;
+        int curSum = 0;
+
+        for (int i = 0; i < k; i++) {
+            curSum += nums[i];
+        }
+
+        int tmp = curSum;
+        for (int i = k; i < len; i++) {
+            tmp += nums[i] - nums[i - k];
+            curSum = Math.max(curSum, tmp);
+        }
+
+        return (double) curSum / k;
+    }
+}
