@@ -1,7 +1,7 @@
 // https://leetcode.com/problems/array-transformation/
 //
 // algorithms
-// Easy (54.52%)
+// Medium (54.52%)
 // Total Accepted: 3,208
 // Total Submissions: 5,884
 // beats 100.0% of java submissions
