@@ -8,28 +8,23 @@
 
 class Solution {
     public boolean checkRecord(String s) {
-        int ANum = 0;
-        int LNum = 0;
-        int length = s.length();
-        char[] chs = s.toCharArray();
-        
-        for (int i = 0; i < length; i++) {
-            if (chs[i] == 'A') {
-                ANum++;
-                LNum = 0;
-                if (ANum > 1) {
-                    return false;
-                }
-            } else if (chs[i] == 'L') {
-                LNum++;
-                if (LNum == 3) {
-                    return false;
-                }
+        int late = 0, absent = 0;
+
+        for (char ch : s.toCharArray()) {
+            if (ch == 'A') {
+                late = 0;
+                absent++;
+            } else if (ch == 'L') {
+                late++;
             } else {
-                LNum = 0;
+                late = 0;
+            }
+
+            if (absent > 1 || late > 2) {
+                return false;
             }
         }
-        
+
         return true;
     }
 }
