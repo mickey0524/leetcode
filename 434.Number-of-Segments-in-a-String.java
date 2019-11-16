@@ -22,3 +22,25 @@ class Solution {
         return res;
     }
 }
+
+
+class Solution {
+    public int countSegments(String s) {
+        int res = 0;
+        int len = s.length();
+        int idx = 0;
+
+        while (idx < len) {
+            if (s.charAt(idx) == ' ') {
+                idx++;
+            } else {
+                res++;
+                while (idx < len && s.charAt(idx) != ' ') {
+                    idx++;
+                }
+            }
+        }
+        
+        return res;
+    }
+}
