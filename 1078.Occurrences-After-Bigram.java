@@ -29,3 +29,21 @@ class Solution {
         return res;
     }
 }
+
+
+class Solution {
+    public String[] findOcurrences(String text, String first, String second) {
+        ArrayList<String> l = new ArrayList<>();
+        String[] arr = text.split(" ");
+        int idx = 0, len = arr.length;
+
+        while (idx < len) {
+            if (idx < len - 2 && arr[idx].equals(first) && arr[idx + 1].equals(second)) {
+                l.add(arr[idx + 2]);
+            }
+            idx++;
+        }
+
+        return l.toArray(new String[0]);
+    }
+}
