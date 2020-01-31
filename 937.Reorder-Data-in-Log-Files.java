@@ -23,8 +23,6 @@ class Solution {
             }
         }
 
-        int tmp = 1;
-
         Arrays.sort(logArr, 0, idx + 1);
 
         for (int i = 0; i < len; i++) {
