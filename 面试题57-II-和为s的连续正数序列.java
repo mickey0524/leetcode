@@ -27,7 +27,7 @@ class Solution {
                     arr[i] = left + i;
                 }
                 l.add(arr);
-                sum = sum -= left;
+                sum -= left;
                 left++;
             }
         }
