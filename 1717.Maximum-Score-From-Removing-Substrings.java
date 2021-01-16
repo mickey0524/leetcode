@@ -1,6 +1,6 @@
 // https://leetcode.com/problems/maximum-score-from-removing-substrings/
 // algorithms
-// Easy (37.47%)
+// Medium (37.47%)
 // Total Accepted: 3,920
 // Total Submissions: 10,461
 
