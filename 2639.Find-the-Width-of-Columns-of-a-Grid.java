@@ -13,7 +13,7 @@ class Solution {
         
         int[] res = new int[n];
         for (int i = 0; i < n; i++) {
-            int maxColLen = Integer.MAX_VALUE;
+            int maxColLen = Integer.MIN_VALUE;
             for (int j = 0; j < m; j++) {
                 String tmp = String.valueOf(grid[j][i]);
                 int tmpLen = tmp.length();
